@@ -9,3 +9,8 @@ export interface Movie {
   genre_ids: number[];
   original_language: string;
 }
+
+export interface MovieResponse {
+  results: Movie[];
+  total_pages: number;
+}
