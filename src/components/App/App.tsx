@@ -7,7 +7,7 @@ import { keepPreviousData } from "@tanstack/react-query";
 import toast, { Toaster } from "react-hot-toast";
 import ReactPaginate from "react-paginate";
 
-import type { Movie, MovieResponse } from "../../types/movie";
+import type { Movie } from "../../types/movie";
 import { fetchMovies } from "../../services/movieService";
 
 import SearchBar from "../SearchBar/SearchBar";
@@ -27,11 +27,7 @@ export default function App() {
     setQuery(topic);
   };
 
-  const { data, isLoading, isError, isSuccess } = useQuery<
-    MovieResponse,
-    Error,
-    MovieResponse
-  >({
+  const { data, isLoading, isError, isSuccess } = useQuery({
     queryKey: ["fetchMovies", query, page],
     queryFn: () => fetchMovies(query, page),
     enabled: query !== "",

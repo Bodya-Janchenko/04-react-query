@@ -34,15 +34,20 @@
 //  }
 
 import axios from "axios";
-import type { MovieResponse } from "../types/movie";
-// export interface MovieResponse {
-//   results: Movie[];
-// }
+import type { Movie } from "../types/movie";
 
-const url = "https:api.themoviedb.org/3/search/movie";
-const token = import.meta.env.VITE_TMDB_TOKEN;
+interface MovieResponse {
+  results: Movie[];
+  total_pages: number;
+}
 
-export const fetchMovies = async (query: string, page: number) => {
+const url: string = "https://api.themoviedb.org/3/search/movie";
+const token = import.meta.env.VITE_TMDB_TOKEN as string;
+
+export const fetchMovies = async (
+  query: string,
+  page: number
+): Promise<MovieResponse> => {
   const response = await axios.get<MovieResponse>(url, {
     headers: {
       accept: "application/json",
